@@ -3,10 +3,14 @@ from sqlalchemy import text
 
 from app.database.database import engine
 from app.routes.medications import router as medication_router
+from app.routes.schedules import router as schedule_router
+
 
 app = FastAPI(title="CareConnect API")
 
+
 app.include_router(medication_router)
+app.include_router(schedule_router)
 
 
 @app.get("/")
