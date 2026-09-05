@@ -1,0 +1,162 @@
+.add-medication-page {
+  min-height: 100vh;
+  background: #eaf4ee;
+  padding: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #26383a;
+}
+
+.add-medication-container {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.add-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 26px;
+}
+
+.add-header h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+}
+
+.add-header > div > p:last-child {
+  margin: 0;
+  color: #657577;
+  font-size: 18px;
+}
+
+.small-heading {
+  margin: 0 0 6px;
+  color: #4f8a8b;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.medication-form {
+  background: #f7f3ec;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(79, 138, 139, 0.1);
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h2 {
+  margin: 0 0 18px;
+  font-size: 26px;
+}
+
+.form-section > p {
+  color: #657577;
+  margin-top: -8px;
+  margin-bottom: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+  color: #37494b;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  min-height: 56px;
+  border-radius: 16px;
+  border: 1px solid #d3ddd7;
+  padding: 12px 14px;
+  background: #fffaf2;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  border-color: #4f8a8b;
+  box-shadow: 0 0 0 3px rgba(79, 138, 139, 0.12);
+}
+
+.schedule-form-section {
+  background: #edf5ef;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.save-medication-btn {
+  width: 100%;
+  min-height: 60px;
+  border: none;
+  border-radius: 18px;
+  background: #4f8a8b;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.save-medication-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-message {
+  margin-bottom: 18px;
+  padding: 15px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+.form-message.success {
+  background: #dcebe5;
+  color: #315f51;
+}
+
+.form-message.error {
+  background: #f4d9d4;
+  color: #9c4e43;
+}
+
+.back-btn {
+  min-height: 56px;
+  border: none;
+  border-radius: 18px;
+  padding: 12px 20px;
+  background: #f7f3ec;
+  color: #4f8a8b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .add-medication-page {
+    padding: 20px 14px;
+  }
+
+  .add-header {
+    flex-direction: column;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medication-form {
+    padding: 20px;
+  }
+}

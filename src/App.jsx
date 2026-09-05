@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import RoleSelect from "./pages/RoleSelect";
 import CaregiverLogin from "./pages/CaregiverLogin";
@@ -6,68 +6,196 @@ import ElderlyLogin from "./pages/ElderlyLogin";
 import CaregiverDashboard from "./pages/CaregiverDashboard";
 import ElderlyDashboard from "./pages/ElderlyDashboard";
 
+import MedicationSchedule from "./pages/MedicationSchedule";
+import AddMedication from "./pages/AddMedication";
+
+import { checkBackendHealth } from "./services/api";
+
 function App() {
-  // Read previous login from browser storage
-  const savedRole = localStorage.getItem("careconnectRole");
-  const savedLogin = localStorage.getItem("careconnectLoggedIn");
+  const savedRole =
+    localStorage.getItem("careconnectRole");
 
-  const [role, setRole] = useState(savedRole || null);
-  const [loggedIn, setLoggedIn] = useState(savedLogin === "true");
+  const savedLogin =
+    localStorage.getItem(
+      "careconnectLoggedIn"
+    );
 
-  const handleRoleSelect = (selectedRole) => {
+  const [role, setRole] = useState(
+    savedRole || null
+  );
+
+  const [loggedIn, setLoggedIn] =
+    useState(savedLogin === "true");
+
+  const [currentPage, setCurrentPage] =
+    useState("dashboard");
+
+  useEffect(() => {
+    checkBackendHealth()
+      .then((data) => {
+        console.log(
+          "BACKEND CONNECTED:",
+          data
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "BACKEND CONNECTION FAILED:",
+          error
+        );
+      });
+  }, []);
+
+  const handleRoleSelect = (
+    selectedRole
+  ) => {
     setRole(selectedRole);
+    setLoggedIn(false);
+    setCurrentPage("dashboard");
 
-    // Remember which type of user selected the app
-    localStorage.setItem("careconnectRole", selectedRole);
+    localStorage.setItem(
+      "careconnectRole",
+      selectedRole
+    );
+
+    localStorage.removeItem(
+      "careconnectLoggedIn"
+    );
   };
 
   const handleLoginSuccess = () => {
     setLoggedIn(true);
 
-    // Remember that this device has logged in successfully
-    localStorage.setItem("careconnectLoggedIn", "true");
+    localStorage.setItem(
+      "careconnectLoggedIn",
+      "true"
+    );
   };
 
   const handleSwitchRole = () => {
     setRole(null);
     setLoggedIn(false);
+    setCurrentPage("dashboard");
 
-    localStorage.removeItem("careconnectRole");
-    localStorage.removeItem("careconnectLoggedIn");
+    localStorage.removeItem(
+      "careconnectRole"
+    );
+
+    localStorage.removeItem(
+      "careconnectLoggedIn"
+    );
   };
 
-  // FIRST TIME: select role
   if (!role) {
-    return <RoleSelect onSelectRole={handleRoleSelect} />;
+    return (
+      <RoleSelect
+        onSelectRole={
+          handleRoleSelect
+        }
+      />
+    );
   }
 
-  // Caregiver login only when not already logged in
-  if (role === "caregiver" && !loggedIn) {
+  if (
+    role === "caregiver" &&
+    !loggedIn
+  ) {
     return (
       <CaregiverLogin
-        onLoginSuccess={handleLoginSuccess}
-        onSwitchRole={handleSwitchRole}
+        onLoginSuccess={
+          handleLoginSuccess
+        }
+        onSwitchRole={
+          handleSwitchRole
+        }
       />
     );
   }
 
-  // Elderly login only when not already logged in
-  if (role === "elderly" && !loggedIn) {
+  if (
+    role === "elderly" &&
+    !loggedIn
+  ) {
     return (
       <ElderlyLogin
-        onLoginSuccess={handleLoginSuccess}
-        onSwitchRole={handleSwitchRole}
+        onLoginSuccess={
+          handleLoginSuccess
+        }
+        onSwitchRole={
+          handleSwitchRole
+        }
       />
     );
   }
 
-  // Already logged in → go directly to dashboard
+  if (
+    role === "caregiver" &&
+    currentPage === "addMedication"
+  ) {
+    return (
+      <AddMedication
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+      />
+    );
+  }
+
+  if (
+    role === "caregiver" &&
+    currentPage ===
+      "medicationSchedule"
+  ) {
+    return (
+      <MedicationSchedule
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+      />
+    );
+  }
+
+  if (
+    role === "elderly" &&
+    currentPage ===
+      "medicationSchedule"
+  ) {
+    return (
+      <MedicationSchedule
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+      />
+    );
+  }
+
   if (role === "caregiver") {
-    return <CaregiverDashboard />;
+    return (
+      <CaregiverDashboard
+        onAddMedication={() =>
+          setCurrentPage(
+            "addMedication"
+          )
+        }
+        onViewSchedule={() =>
+          setCurrentPage(
+            "medicationSchedule"
+          )
+        }
+      />
+    );
   }
 
   if (role === "elderly") {
-    return <ElderlyDashboard />;
+    return (
+      <ElderlyDashboard
+        onViewSchedule={() =>
+          setCurrentPage(
+            "medicationSchedule"
+          )
+        }
+      />
+    );
   }
 
   return null;
