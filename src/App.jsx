@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import RoleSelect from "./pages/RoleSelect";
 import CaregiverLogin from "./pages/CaregiverLogin";
 import ElderlyLogin from "./pages/ElderlyLogin";
@@ -6,41 +7,68 @@ import CaregiverDashboard from "./pages/CaregiverDashboard";
 import ElderlyDashboard from "./pages/ElderlyDashboard";
 
 function App() {
-  const [screen, setScreen] = useState("role");
+  // Read previous login from browser storage
+  const savedRole = localStorage.getItem("careconnectRole");
+  const savedLogin = localStorage.getItem("careconnectLoggedIn");
 
-  if (screen === "role") {
-    return (
-      <RoleSelect
-        onSelectRole={(role) =>
-          setScreen(role === "caregiver" ? "login-caregiver" : "login-elderly")
-        }
-      />
-    );
+  const [role, setRole] = useState(savedRole || null);
+  const [loggedIn, setLoggedIn] = useState(savedLogin === "true");
+
+  const handleRoleSelect = (selectedRole) => {
+    setRole(selectedRole);
+
+    // Remember which type of user selected the app
+    localStorage.setItem("careconnectRole", selectedRole);
+  };
+
+  const handleLoginSuccess = () => {
+    setLoggedIn(true);
+
+    // Remember that this device has logged in successfully
+    localStorage.setItem("careconnectLoggedIn", "true");
+  };
+
+  const handleSwitchRole = () => {
+    setRole(null);
+    setLoggedIn(false);
+
+    localStorage.removeItem("careconnectRole");
+    localStorage.removeItem("careconnectLoggedIn");
+  };
+
+  // FIRST TIME: select role
+  if (!role) {
+    return <RoleSelect onSelectRole={handleRoleSelect} />;
   }
 
-  if (screen === "login-caregiver") {
+  // Caregiver login only when not already logged in
+  if (role === "caregiver" && !loggedIn) {
     return (
       <CaregiverLogin
-        onLoginSuccess={() => setScreen("dashboard-caregiver")}
-        onSwitchRole={() => setScreen("login-elderly")}
+        onLoginSuccess={handleLoginSuccess}
+        onSwitchRole={handleSwitchRole}
       />
     );
   }
 
-  if (screen === "login-elderly") {
+  // Elderly login only when not already logged in
+  if (role === "elderly" && !loggedIn) {
     return (
       <ElderlyLogin
-        patientName="Ravi"
-        caregiverPhone="+919876543210"
-        onLoginSuccess={() => setScreen("dashboard-elderly")}
-        onSwitchRole={() => setScreen("login-caregiver")}
+        onLoginSuccess={handleLoginSuccess}
+        onSwitchRole={handleSwitchRole}
       />
     );
   }
 
-  if (screen === "dashboard-caregiver") return <CaregiverDashboard />;
-  if (screen === "dashboard-elderly")
-    return <ElderlyDashboard patientName="Ravi" caregiverPhone="+919876543210" />;
+  // Already logged in → go directly to dashboard
+  if (role === "caregiver") {
+    return <CaregiverDashboard />;
+  }
+
+  if (role === "elderly") {
+    return <ElderlyDashboard />;
+  }
 
   return null;
 }

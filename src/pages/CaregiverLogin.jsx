@@ -1,86 +1,95 @@
 import { useState } from "react";
 import "./CaregiverLogin.css";
 
+const DEMO_EMAIL = "caregiver@careconnect.com";
+const DEMO_PASSWORD = "1234";
+
 function CaregiverLogin({ onLoginSuccess, onSwitchRole }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!email.trim() || !password.trim()) {
-      setError("Please enter both your email and password.");
+      setError("Please enter both email and password.");
       return;
     }
+
+    if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
+      setError("Incorrect email or password.");
+      return;
+    }
+
     setError("");
-    onLoginSuccess({ email });
+
+    if (onLoginSuccess) {
+      onLoginSuccess();
+    }
   };
 
   return (
-    <div className="cg-login-page">
-      <div className="cg-login-brand">
-        <div className="cg-brand-shape cg-shape-a" />
-        <div className="cg-brand-shape cg-shape-b" />
-        <div className="cg-brand-content">
+    <div className="caregiver-login-page">
+      <div className="caregiver-login-card">
+        <div className="login-brand">
           <h1>CareConnect</h1>
-          <p>Caring for Ravi, together.</p>
+          <p>Caregiver Login</p>
         </div>
-      </div>
 
-      <div className="cg-login-form-panel">
-        <form className="cg-login-form" onSubmit={handleSubmit}>
-          <h2>Caregiver Sign In</h2>
-          <p className="cg-login-sub">
-            Track medication and stay ahead of missed doses.
+        <div className="login-copy">
+          <h2>Welcome Back</h2>
+          <p>
+            Sign in to monitor medication adherence, alerts and patient activity.
           </p>
+        </div>
 
-          <label className="cg-field">
-            <span>Email</span>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Email Address
             <input
               type="email"
+              placeholder="caregiver@careconnect.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              autoComplete="email"
             />
           </label>
 
-          <label className="cg-field">
-            <span>Password</span>
-            <div className="cg-password-wrap">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                autoComplete="current-password"
-              />
-              <button
-                type="button"
-                className="cg-password-toggle"
-                onClick={() => setShowPassword((s) => !s)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </div>
+          <label>
+            Password
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
 
-          {error && <p className="cg-error">{error}</p>}
+          {error && <div className="login-error">{error}</div>}
 
-          <button type="submit" className="cg-submit-btn">
-            Sign In
+          <button type="submit" className="login-button">
+            Login
           </button>
-
-          <div className="cg-login-links">
-            <button type="button" className="cg-link-btn">
-              Forgot password?
-            </button>
-            <button type="button" className="cg-link-btn" onClick={onSwitchRole}>
-              Not a caregiver?
-            </button>
-          </div>
         </form>
+
+        <div className="demo-credentials">
+          <p>
+            <strong>Demo Email:</strong> caregiver@careconnect.com
+          </p>
+          <p>
+            <strong>Demo Password:</strong> 1234
+          </p>
+        </div>
+
+        {onSwitchRole && (
+          <button
+            type="button"
+            className="switch-role-button"
+            onClick={onSwitchRole}
+          >
+            ← Switch Role
+          </button>
+        )}
       </div>
     </div>
   );
