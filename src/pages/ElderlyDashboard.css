@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.eld-page {
+  --eld-bg: #fff9f2;
+  --eld-surface: #ffffff;
+  --eld-ink: #1f1f1f;
+  --eld-muted: #55524d;
+  --eld-border: #ede3d6;
+  --eld-teal: #1e7f76;
+  --eld-teal-tint: #e3f3f0;
+  --eld-amber: #a5701a;
+  --eld-amber-tint: #fbf0dd;
+  --eld-red: #b1362a;
+  --eld-red-tint: #fbe9e7;
+
+  min-height: 100vh;
+  background: var(--eld-bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 18px;
+  color: var(--eld-ink);
+  padding: 28px 24px 130px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.eld-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  margin: 0 0 18px;
+}
+
+.eld-toast {
+  background: var(--eld-teal-tint);
+  color: var(--eld-teal);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.eld-streak {
+  background: var(--eld-amber-tint);
+  color: var(--eld-amber);
+  font-size: 18px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.eld-hero-card {
+  background: var(--eld-surface);
+  border: 1px solid var(--eld-border);
+  border-radius: 22px;
+  padding: 30px 26px;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.eld-hero-label {
+  color: var(--eld-muted);
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.eld-hero-card h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  margin: 0 0 6px;
+}
+
+.eld-hero-sub {
+  color: var(--eld-muted);
+  font-size: 17px;
+  margin: 0 0 24px;
+}
+
+.eld-hero-done h2 {
+  color: var(--eld-teal);
+}
+
+.eld-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.eld-btn {
+  min-height: 68px;
+  border-radius: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.eld-btn-primary {
+  background: var(--eld-teal);
+  color: white;
+}
+
+.eld-btn-secondary {
+  background: var(--eld-amber-tint);
+  color: var(--eld-amber);
+}
+
+.eld-btn-ghost {
+  background: transparent;
+  color: var(--eld-muted);
+  text-decoration: underline;
+  min-height: auto;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.eld-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.eld-schedule {
+  background: var(--eld-surface);
+  border: 1px solid var(--eld-border);
+  border-radius: 22px;
+  padding: 22px 24px;
+}
+
+.eld-schedule h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  margin: 0 0 14px;
+}
+
+.eld-schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--eld-border);
+}
+
+.eld-schedule-row:last-child {
+  border-bottom: none;
+}
+
+.eld-schedule-icon {
+  font-size: 24px;
+}
+
+.eld-schedule-row strong {
+  font-size: 18px;
+}
+
+.eld-schedule-row p {
+  margin: 2px 0 0;
+  color: var(--eld-muted);
+  font-size: 15px;
+}
+
+.eld-emergency-btn {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  max-width: 512px;
+  margin: 0 auto;
+  background: var(--eld-red);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(177, 54, 42, 0.35);
+  display: block;
+}
+
+.eld-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 31, 31, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.eld-modal {
+  background: var(--eld-surface, #fff);
+  border-radius: 22px;
+  padding: 30px 26px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.eld-modal h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+
+.eld-modal-sub {
+  color: #55524d;
+  font-size: 16px;
+  margin: 0 0 20px;
+}
+
+.eld-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: #f2ede3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.eld-camera-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 20px;
+}
+
+.eld-camera-frame video {
+  width: 100%;
+  display: block;
+}
+
+.eld-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eld-camera-error p {
+  color: #b1362a;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+  .eld-hero-actions {
+    flex-direction: row;
+  }
+  .eld-hero-actions .eld-btn {
+    flex: 1;
+  }
+}

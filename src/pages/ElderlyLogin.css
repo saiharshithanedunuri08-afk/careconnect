@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.el-login-page {
+  min-height: 100vh;
+  background: #fff9f2;
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px 40px;
+  text-align: center;
+}
+
+.el-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #e3f3f0;
+  border: 3px solid #1e7f76;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+.el-login-page h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  margin: 0 0 6px;
+  color: #1f1f1f;
+}
+
+.el-login-sub {
+  color: #55524d;
+  font-size: 17px;
+  margin: 0 0 28px;
+}
+
+.el-pin-dots {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.el-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #a5701a;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.el-dot-filled {
+  background: #a5701a;
+}
+
+.el-shake {
+  animation: el-shake-anim 0.4s ease;
+}
+
+@keyframes el-shake-anim {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.el-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 36px;
+}
+
+.el-key {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid #ede3d6;
+  background: white;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f1f1f;
+  cursor: pointer;
+}
+
+.el-key:active {
+  background: #e3f3f0;
+  border-color: #1e7f76;
+}
+
+.el-key-action {
+  font-size: 22px;
+  color: #b1362a;
+  border: none;
+  background: transparent;
+}
+
+.el-help-link {
+  display: block;
+  background: #fbe9e7;
+  color: #b1362a;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 16px;
+}
+
+.el-switch-link {
+  border: none;
+  background: none;
+  color: #6b7686;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
